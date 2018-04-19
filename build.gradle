@@ -1,0 +1,43 @@
+buildscript {
+    ext.kotlin_version = '1.2.31'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+
+sourceSets {
+    test.kotlin.srcDirs = test.java.srcDirs
+}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+dependencies {
+    testCompile project(':lwjgl')
+    testCompile project(':android')
+    testCompile 'org.lwjgl:lwjgl-glfw:3.1.6'
+    testRuntime 'org.lwjgl:lwjgl-glfw:3.1.6:natives-windows'
+    testRuntime 'org.lwjgl:lwjgl-opengl:3.1.6:natives-windows'
+    testRuntime 'org.lwjgl:lwjgl:3.1.6:natives-windows'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+compileKotlin.kotlinOptions.jvmTarget = "1.6"
+compileTestKotlin.kotlinOptions.jvmTarget = "1.6"
+
+task printSS {
+	println sourceSets.main.java.outputDir
+    println sourceSets.main.kotlin
+    println tasks.compileTestKotlin.destinationDir
+}
