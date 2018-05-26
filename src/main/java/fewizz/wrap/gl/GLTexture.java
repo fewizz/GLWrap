@@ -22,15 +22,11 @@ public abstract class GLTexture extends GLBindableObject<GLTexture> {
 		this(GLContext.current(), tar);
 	}
 
-	public void bind() {
+	@Override
+	protected void bind() {
 		ctx.wrap.tex.bind(target.token, name);
 		ctx.activeTextures[ctx.activeTextureUnit] = this;
 		ctx.boundTexture = this;
-	}
-
-	public void bindTextureUnit(int index) {
-		ctx.setActiveTextureUnitIndex(index);
-		bind();
 	}
 
 	@Override
@@ -45,13 +41,12 @@ public abstract class GLTexture extends GLBindableObject<GLTexture> {
 		parameter(GL_TEXTURE_WRAP_T, mode.token);
 	}
 	
-	public void filter(TextureMagFilter filter) {
+	public void magFilter(TextureMagFilter filter) {
 		bind();
 		parameter(GL_TEXTURE_MAG_FILTER, filter.token);
-		parameter(GL_TEXTURE_MIN_FILTER, filter.token);
 	}
 
-	protected GLTexture parameter(int pname, int param) {
+	public GLTexture parameter(int pname, int param) {
 		bind();
 		ctx.wrap.tex.parameteri(target.token, pname, param);
 		return getThis();

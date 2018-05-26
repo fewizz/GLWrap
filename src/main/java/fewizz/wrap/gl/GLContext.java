@@ -46,9 +46,9 @@ public final class GLContext {
 		wrap = w;
 		api = wrap.getApi();
 		
-		versionMajor = getInteger(GLConstants.GL_MAJOR_VERSION);
-		versionMinor = getInteger(GLConstants.GL_MINOR_VERSION);
-		activeTextures = new GLTexture[getInteger(GLConstants.GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS)];
+		versionMajor = getInt(GLConstants.GL_MAJOR_VERSION);
+		versionMinor = getInt(GLConstants.GL_MINOR_VERSION);
+		activeTextures = new GLTexture[getInt(GLConstants.GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS)];
 
 		defaultTexture = new GLTexture(this, TextureTarget.TEXTURE_2D, 0) {
 			@Override
@@ -107,11 +107,16 @@ public final class GLContext {
 		wrap.core.activeTexture(GLConstants.GL_TEXTURE0 + activeTextureUnit);
 	}
 
-	public int getInteger(GetPName pname) {
-		return getInteger(pname.token);
+	public void setActiveTextureUnit(GLTexture tex, int index) {
+		setActiveTextureUnitIndex(index);
+		tex.bind();
+	}
+
+	public int getInt(GetPName pname) {
+		return getInt(pname.token);
 	}
 	
-	public int getInteger(int pname) { return wrap.core.getInteger(pname); }
+	public int getInt(int pname) { return wrap.core.getInteger(pname); }
 	
 	public String getString(StringName pname) {
 		return wrap.core.getString(pname.token);
@@ -129,16 +134,17 @@ public final class GLContext {
 		wrap.core.clear(ClearBuffer.intMaskOf(mask));
 	}
 	
-	public void drawArrays(PrimitiveType mode, int count) {
-		drawArrays(mode, 0, count);
+	public void drawArrays(GLShaderProgram program, PrimitiveType mode, int count) {
+		drawArrays(program, mode, 0, count);
 	}
 	
-	public void drawArrays(GLVertexArray vao, PrimitiveType mode, int count) {
+	public void drawArrays(GLShaderProgram program, GLVertexArray vao, PrimitiveType mode, int count) {
 		vao.bind();
-		drawArrays(mode, 0, count);
+		drawArrays(program, mode, 0, count);
 	}
 	
-	public void drawArrays(PrimitiveType mode, int first, int count) {
+	public void drawArrays(GLShaderProgram program, PrimitiveType mode, int first, int count) {
+		program.bind();
 		wrap.core.drawArrays(mode.token, first, count);
 	}
 	

@@ -1,6 +1,7 @@
 package fewizz.wrap.gl.wrapper;
 
 import java.nio.*;
+import java.nio.Buffer;
 
 import fewizz.wrap.gl.API;
 import fewizz.wrap.gl.BufferUtils;
@@ -135,7 +136,7 @@ public final class AndroidWrapper extends Wrapper {
 			}
 
 			@Override
-			public void image2D(int tar, int level, int internalFormat, int w, int h, int border, int bufferPixelFormat, int bufferDataType, ByteBuffer buf) {
+			public void image2D(int tar, int level, int internalFormat, int w, int h, int border, int bufferPixelFormat, int bufferDataType, Buffer buf) {
 				GLES10.glTexImage2D(tar, level, internalFormat, w, h, border, bufferPixelFormat, bufferDataType, buf);
 			}
 

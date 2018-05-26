@@ -50,8 +50,7 @@ fun main(args: Array<String>) {
     while(!glfwWindowShouldClose(window)) {
         glfwPollEvents()
         gl.clear(ClearBuffer.COLOR_BUFFER_BIT)
-        program.use()
-        gl.drawArrays(vao, PrimitiveType.TRIANGLES, 3)
+        gl.drawArrays(program, vao, PrimitiveType.TRIANGLES, 3)
         glfwSwapBuffers(window)
     }
 }

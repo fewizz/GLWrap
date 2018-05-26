@@ -8,7 +8,7 @@ import java.nio.IntBuffer;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class GLShaderProgram extends GLObjectWithId<GLShaderProgram> {
+public class GLShaderProgram extends GLBindableObject<GLShaderProgram> {
 	final Set<GLShader> shaders = new LinkedHashSet<>();
 	boolean linked = false;
 	
@@ -29,8 +29,9 @@ public class GLShaderProgram extends GLObjectWithId<GLShaderProgram> {
 		attachShaders(new GLShader(t1, src1), new GLShader(t2, src2));
 		link();
 	}
-	
-	public void use() {
+
+	@Override
+	protected void bind() {
 		if(!isLinked()) {
 			throw new Error("ShaderProgram is not linked");
 		}
@@ -79,21 +80,21 @@ public class GLShaderProgram extends GLObjectWithId<GLShaderProgram> {
 	}
 
 	public void setUniformInt(int location, int value) {
-		use();
+		bind();
 		ctx.wrap.shaderProg.uniform1i(location, value);
 	}
 	
 	public void setUniformMatrix4f(int location, int count, boolean trans, FloatBuffer buf) {
-		use();
+		bind();
 		ctx.wrap.shaderProg.uniformMatrix4fv(location, count, trans, buf);
 	}
 
 	public void setUniformIntArray(int location, int count, IntBuffer buf) {
-		use();
+		bind();
 		ctx.wrap.shaderProg.uniform1iv(location, count, buf);
 	}
 	
 	public void setAttrib() {
-		use();
+		bind();
 	}
 }

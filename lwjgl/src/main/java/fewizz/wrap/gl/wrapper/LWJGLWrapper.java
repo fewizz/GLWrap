@@ -110,12 +110,12 @@ public class LWJGLWrapper extends Wrapper {
 			
 			@Override
 			public void parameteri(int tar, int pname, int val) {
-				GL11.glTexParameteri(tar, pname, tar);
+				GL11.glTexParameteri(tar, pname, val);
 			}
 			
 			@Override
 			public void parameterf(int tar, int pname, float val) {
-				GL11.glTexParameterf(tar, pname, tar);
+				GL11.glTexParameterf(tar, pname, val);
 			}
 
 			@Override
@@ -124,8 +124,12 @@ public class LWJGLWrapper extends Wrapper {
 			}
 
 			@Override
-			public void image2D(int tar, int level, int intfor, int w, int h, int border, int bufferPixelFormat, int bufferDataType, ByteBuffer buf) {
-				GL11.glTexImage2D(tar, level, intfor, w, h, border, bufferPixelFormat, bufferDataType, buf);
+			public void image2D(int tar, int level, int intfor, int w, int h, int border, int bufferPixelFormat, int bufferDataType, java.nio.Buffer buf) {
+				if(buf instanceof ByteBuffer)
+					GL11.glTexImage2D(tar, level, intfor, w, h, border, bufferPixelFormat, bufferDataType, (ByteBuffer) buf);
+				else if(buf instanceof FloatBuffer)
+					GL11.glTexImage2D(tar, level, intfor, w, h, border, bufferPixelFormat, bufferDataType, (FloatBuffer) buf);
+				else throw new Error("Unsupported buffer type");
 			}
 
 			@Override

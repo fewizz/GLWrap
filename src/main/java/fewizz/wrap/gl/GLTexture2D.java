@@ -5,6 +5,7 @@ import fewizz.wrap.gl.enums.PixelFormat;
 import fewizz.wrap.gl.enums.PixelType;
 import fewizz.wrap.gl.enums.TextureTarget;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 
 public class GLTexture2D extends GLTexture {
@@ -13,7 +14,7 @@ public class GLTexture2D extends GLTexture {
 		super(TextureTarget.TEXTURE_2D);
 	}
 	
-	public void data2D(int level, InternalFormat inernalFormat, int width, int height, PixelFormat bufferPixelFormat, PixelType bufferDataType, ByteBuffer buf) {
+	public void data2D(int level, InternalFormat inernalFormat, int width, int height, PixelFormat bufferPixelFormat, PixelType bufferDataType, Buffer buf) {
 		bind();
 		ctx.wrap.tex.image2D(target.token, level, inernalFormat.token, width, height, 0, bufferPixelFormat.token, bufferDataType.token, buf);
 	}

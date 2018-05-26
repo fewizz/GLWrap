@@ -4,6 +4,7 @@ import fewizz.wrap.gl.API;
 import fewizz.wrap.gl.enums.BufferTarget;
 import fewizz.wrap.gl.enums.VertexBufferObjectParameter;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -73,7 +74,7 @@ public abstract class Wrapper {
 		void parameteri(int tar, int pname, int val);
 		void parameterf(int tar, int pname, float val);
 		int getTexLevelParameteri(int target, int level, int param);
-		void image2D(int tar, int level, int internalFormat, int w, int h, int border, int bufferPixelFormat, int bufferDataType, ByteBuffer buf);
+		void image2D(int tar, int level, int internalFormat, int w, int h, int border, int bufferPixelFormat, int bufferDataType, Buffer buf);
 		void subImage2D(int tar, int level, int xOff, int yOff, int w, int h, int bufferPixelFormat, int bufferDataType, ByteBuffer buf);
 		void image3D(int tar, int level, int internalFormat, int w, int h, int d, int border, int bufferPixelFormat, int bufferDataType, ByteBuffer buf);
 		void subImage3D(int tar, int level, int xOff, int yOff, int zOff, int w, int h, int d, int bufferPixelFormat, int bufferDataType, ByteBuffer buf);
