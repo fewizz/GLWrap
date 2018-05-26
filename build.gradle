@@ -35,7 +35,7 @@ dependencies {
     testRuntime 'org.lwjgl:lwjgl-glfw:3.1.6:natives-windows'
     testRuntime 'org.lwjgl:lwjgl-opengl:3.1.6:natives-windows'
     testRuntime 'org.lwjgl:lwjgl:3.1.6:natives-windows'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 compileKotlin.kotlinOptions.jvmTarget = "1.6"
 compileTestKotlin.kotlinOptions.jvmTarget = "1.6"
