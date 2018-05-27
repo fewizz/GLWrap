@@ -19,6 +19,7 @@ apply plugin: 'kotlin'
 apply plugin: 'maven'
 
 group = 'ru.fewizz.wrap.gl'
+version = '0.0.1'
 
 sourceSets {
     test.kotlin.srcDirs = test.java.srcDirs
