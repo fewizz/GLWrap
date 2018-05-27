@@ -32,7 +32,7 @@ targetCompatibility = 1.7
 
 dependencies {
     testCompile project(':glwrap-lwjgl')
-    testCompile project(':android')
+    //testCompile project(':android')
     testCompile 'org.joml:joml'
     testCompile 'org.lwjgl:lwjgl-glfw:3.1.6'
     testRuntime 'org.lwjgl:lwjgl-glfw:3.1.6:natives-windows'

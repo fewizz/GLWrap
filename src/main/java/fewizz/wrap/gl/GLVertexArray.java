@@ -32,14 +32,24 @@ public class GLVertexArray extends GLBindableObject<GLVertexArray> {
 		vbos.clear();
 	}
 	
-	public void forEachAttribArray(VAAConsumer action) {
+	public void forEachAttribArray(VAAIndexedConsumer action) {
 		for(Map.Entry<Integer, VertexAttribArray> e : vbos.entrySet()) {
 			action.apply(e.getKey(), e.getValue());
 		}
 	}
 
-	interface VAAConsumer {
+	public void forEachAttribArray(VAAConsumer action) {
+		for(VertexAttribArray a : vbos.values()) {
+			action.apply(a);
+		}
+	}
+
+	public interface VAAIndexedConsumer {
 		void apply(int index, VertexAttribArray vaa);
+	}
+
+	public interface VAAConsumer {
+		void apply(VertexAttribArray vaa);
 	}
 	
 	public VertexAttribArray getVertexAttribArrayAt(int index) {
