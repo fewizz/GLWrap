@@ -3,6 +3,7 @@ package fewizz.wrap.gl;
 import fewizz.wrap.gl.enums.VertexAttribType;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class GLVertexArray extends GLBindableObject<GLVertexArray> {
 	final HashMap<Integer, VertexAttribArray> vbos = new HashMap<>();
@@ -31,9 +32,15 @@ public class GLVertexArray extends GLBindableObject<GLVertexArray> {
 		vbos.clear();
 	}
 	
-	//public void forEachAttribArray(BiConsumer<Integer, VertexAttribArray> action) {
-	//	vbos.forEach(action);
-	//}
+	public void forEachAttribArray(VAAConsumer action) {
+		for(Map.Entry<Integer, VertexAttribArray> e : vbos.entrySet()) {
+			action.apply(e.getKey(), e.getValue());
+		}
+	}
+
+	interface VAAConsumer {
+		void apply(int index, VertexAttribArray vaa);
+	}
 	
 	public VertexAttribArray getVertexAttribArrayAt(int index) {
 		return vbos.get(index);

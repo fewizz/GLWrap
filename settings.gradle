@@ -1,3 +1,6 @@
-rootProject.name = 'glwrap'
+include 'android'
+include 'lwjgl'
 
-include ':android', ':lwjgl'
+project(':lwjgl').name = 'glwrap-lwjgl'
+
+rootProject.name = 'glwrap'
