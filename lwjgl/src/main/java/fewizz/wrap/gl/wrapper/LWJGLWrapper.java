@@ -179,6 +179,11 @@ public class LWJGLWrapper extends Wrapper {
 			}
 
 			@Override
+			public void allocate(int target, long size, int usage) {
+				GL15.glBufferData(target, size, usage);
+			}
+
+			@Override
 			public ByteBuffer mapBufferRange(int target, long offset, long length, ByteBuffer buf, int access) {
 				return GL30.glMapBufferRange(target, offset, length, access, buf);
 			}

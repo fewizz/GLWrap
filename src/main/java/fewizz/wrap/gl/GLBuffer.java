@@ -44,6 +44,11 @@ public class GLBuffer<SELF> extends GLBindableObject<SELF> {
 		ctx.wrap.buff.subData(target.token, offset, size, buf);
 	}
 
+	public void allocate(long size, BufferUsage usage) {
+		bind();
+		ctx.wrap.buff.allocate(target.token, size, usage.token);
+	}
+
 	public ByteBuffer mapRange(long offset, long size, BufferAccess... access) {
 		bind();
 		allocation = ctx.wrap.buff.mapBufferRange(target.token, offset, size, allocation, BufferAccess.intMaskOf(access));

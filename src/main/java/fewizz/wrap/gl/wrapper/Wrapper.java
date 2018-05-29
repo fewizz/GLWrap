@@ -82,6 +82,7 @@ public abstract class Wrapper {
 	
 	public interface BuffWrap extends BindableObjWrap {
 		void data(int target, long size, ByteBuffer buf, int usage);
+		void allocate(int target, long size, int usage);
 		void subData(int target, long offset, long size, ByteBuffer buf);
 		ByteBuffer mapBufferRange(int target, long offset, long length, ByteBuffer buf, int access);
 		void unmap(int target);
