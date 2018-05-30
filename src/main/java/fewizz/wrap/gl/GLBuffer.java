@@ -31,6 +31,7 @@ public class GLBuffer<SELF> extends GLBindableObject<SELF> {
 	}
 	
 	public int size() {
+		bind();
 		return ctx.wrap.buff.getVBOParameteri(BufferTarget.ARRAY_BUFFER, VertexBufferObjectParameter.BUFFER_SIZE);
 	}
 
