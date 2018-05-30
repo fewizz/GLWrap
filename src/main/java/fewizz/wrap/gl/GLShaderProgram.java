@@ -93,6 +93,11 @@ public class GLShaderProgram extends GLBindableObject<GLShaderProgram> {
 		bind();
 		ctx.wrap.shaderProg.uniform1iv(location, count, buf);
 	}
+
+	public void setUniform3f(int location, float x, float y, float z) {
+		bind();
+		ctx.wrap.shaderProg.uniform3f(location, x, y, z);
+	}
 	
 	public void setAttrib() {
 		bind();

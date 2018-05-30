@@ -301,6 +301,11 @@ public class LWJGLWrapper extends Wrapper {
 			}
 
 			@Override
+			public void uniform3f(int loc, float x, float y, float z) {
+				GL20.glUniform3f(loc, x, y, z);
+			}
+
+			@Override
 			public void attrib1fv(int loc, FloatBuffer buf) {
 				GL20.glVertexAttrib1fv(loc, buf);
 			}

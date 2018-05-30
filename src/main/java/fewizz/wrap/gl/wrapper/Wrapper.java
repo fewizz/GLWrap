@@ -107,6 +107,7 @@ public abstract class Wrapper {
 		void uniform1iv(int loc, int count, IntBuffer buf);
 		void uniformMatrix4fv(int loc, int count, boolean trans, FloatBuffer buf);
 		void uniform1i(int loc, int val);
+		void uniform3f(int loc, float x, float y, float z);
 		void attrib1fv(int loc, FloatBuffer buf);
 	}
 	
