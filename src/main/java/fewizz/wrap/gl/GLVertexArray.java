@@ -44,6 +44,14 @@ public class GLVertexArray extends GLBindableObject<GLVertexArray> {
 		}
 	}
 
+	public int verticiesAvailable() {
+		int min = Integer.MAX_VALUE;
+		for(VertexAttribArray a : vbos.values()) {
+			if(a.getVertexCount() < min) min = a.getVertexCount();
+		}
+		return min;
+	}
+
 	public interface VAAIndexedConsumer {
 		void apply(int index, VertexAttribArray vaa);
 	}

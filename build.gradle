@@ -16,6 +16,7 @@ repositories {
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: 'maven'
 
 allprojects {
     apply plugin: 'maven'
@@ -23,9 +24,6 @@ allprojects {
     version = '0.0.1'
 }
 
-sourceSets {
-    test.kotlin.srcDirs = test.java.srcDirs
-}
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -33,7 +31,7 @@ targetCompatibility = 1.7
 dependencies {
     testCompile project(':glwrap-lwjgl')
     //testCompile project(':android')
-    testCompile 'org.joml:joml'
+    testCompile 'org.joml:joml:1.9.9'
     testCompile 'org.lwjgl:lwjgl-glfw:3.1.6'
     testRuntime 'org.lwjgl:lwjgl-glfw:3.1.6:natives-windows'
     testRuntime 'org.lwjgl:lwjgl-opengl:3.1.6:natives-windows'
@@ -51,9 +49,15 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from javadoc.destinationDir
 }
 
+/*task lwjgl(type: Jar, dependsOn: project(':glwrap-lwjgl').task('assemble')) {
+    classifier = 'lwjgl'
+    //from project('glwrap-lwjgl').file('build/classes/java')
+}*/
+
 artifacts {
     archives sourcesJar
     archives javadocJar
+    archives tasks.getByPath(':glwrap-lwjgl:jar')//project(':glwrap-lwjgl').task('assemble')//lwjgl
 }
 
 compileKotlin.kotlinOptions.jvmTarget = "1.6"
